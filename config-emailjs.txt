@@ -6,7 +6,7 @@
 ✅ VOS VALEURS CONFIGURÉES:
 --------------------------
 1. PUBLIC KEY: R8lXCtn2Vc6Dy3A0D ✅
-2. SERVICE ID: service_addb2pg ✅
+2. SERVICE ID: service_ubi0bue ✅
 3. TEMPLATE ID: template_39nzsbp ✅
 
 🎉 CONFIGURATION TERMINÉE !

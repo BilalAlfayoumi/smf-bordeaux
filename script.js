@@ -265,7 +265,7 @@ function initContactForm() {
         };
         
         // Envoi EmailJS
-        emailjs.send('service_addb2pg', 'template_39nzsbp', templateParams)
+        emailjs.send('service_ubi0bue', 'template_39nzsbp', templateParams)
             .then(function(response) {
                 console.log('✅ Email envoyé avec succès!', response.status, response.text);
                 submitBtn.textContent = '✅ Message envoyé !';
@@ -286,7 +286,7 @@ function initContactForm() {
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                     submitBtn.style.background = '';
-                }, 3000);
+                }, 5000);
             });
     });
 }
