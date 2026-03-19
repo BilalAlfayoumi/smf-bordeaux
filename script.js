@@ -1,15 +1,33 @@
+const EMAILJS_CONFIG = Object.freeze({
+    publicKey: 'R8lXCtn2Vc6Dy3A0D',
+    serviceId: 'service_ubi0bue',
+    templateId: 'template_39nzsbp'
+});
+
 // Configuration EmailJS - Seulement si nécessaire
 function initEmailJS() {
-    // Vérifier si EmailJS est disponible et si on a un formulaire de contact
-    if (typeof emailjs !== 'undefined' && document.getElementById('contact-form')) {
-        emailjs.init({
-            publicKey: "R8lXCtn2Vc6Dy3A0D",
-        });
+    const contactForm = document.getElementById('contact-form');
+
+    if (typeof emailjs === 'undefined' || !contactForm) {
+        return;
     }
+
+    emailjs.init({
+        publicKey: EMAILJS_CONFIG.publicKey,
+    });
+}
+
+function initCurrentYear() {
+    const currentYear = String(new Date().getFullYear());
+
+    document.querySelectorAll('[data-current-year]').forEach((node) => {
+        node.textContent = currentYear;
+    });
 }
 
 // Initialisation générale du site
 document.addEventListener('DOMContentLoaded', function() {
+    initCurrentYear();
     initEmailJS();
     initMobileMenu();
     initContactForm();
@@ -249,9 +267,7 @@ function initContactForm() {
     function clearFieldErrors() {
         ['user_first_name', 'user_last_name', 'user_email', 'user_phone'].forEach((fieldName) => {
             const field = contactForm.querySelector(`[name="${fieldName}"]`);
-            if (field) {
-                field.setCustomValidity('');
-            }
+            if (field) field.setCustomValidity('');
         });
     }
 
@@ -298,7 +314,7 @@ function initContactForm() {
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
 
@@ -319,7 +335,6 @@ function initContactForm() {
         // Animation de chargement
         submitBtn.textContent = 'Envoi en cours...';
         submitBtn.disabled = true;
-        
         const templateParams = {
             to_email: 'smfbordeaux@gmail.com',
             from_name: fullName,
@@ -339,7 +354,7 @@ function initContactForm() {
         };
         
         // Envoi EmailJS
-        emailjs.send('service_ubi0bue', 'template_39nzsbp', templateParams)
+        emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, templateParams)
             .then(function(response) {
                 console.info('✅ Email envoyé avec succès!', response.status, response.text);
                 submitBtn.textContent = '✅ Message envoyé !';
@@ -353,8 +368,8 @@ function initContactForm() {
                     submitBtn.style.background = '';
                 }, 3000);
             }, function(error) {
-                console.log('❌ Erreur d'envoi:', error);
-                submitBtn.textContent = '❌ Erreur d'envoi';
+                console.error('❌ Erreur d\'envoi:', error);
+                submitBtn.textContent = '❌ Erreur d\'envoi';
                 submitBtn.style.background = '#dc3545';
                 
                 setTimeout(() => {
@@ -523,4 +538,4 @@ function initStatsCounter() {
     });
 
     observer.observe(statsSection);
-} 
+}

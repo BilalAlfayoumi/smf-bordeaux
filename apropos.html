@@ -6,20 +6,20 @@
     <title>À Propos - SMF Bordeaux</title>
     <meta name="description" content="Découvrez l'histoire et la mission du groupe SMF Bordeaux">
     <!-- Favicon SEO-friendly pour GitHub Pages et Google Search Console -->
-    <link rel="icon" href="/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="favicon.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
 </head>
 <body class="page-apropos">
     <!-- Header avec navigation -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
-                <a href="index.html" style="text-decoration: none;">
+                <a href="index.html" class="brand-link">
                     <div class="nav-logo">
                         <img src="Logo_SMF.svg.png" alt="Logo SMF" class="logo-img">
                         <span>SMF Bordeaux</span>
@@ -49,7 +49,7 @@
     </header>
 
     <!-- Section Héros À Propos -->
-    <section id="accueil" class="hero" style="background: url('landing.png') center 20%/cover scroll !important;">
+    <section id="accueil" class="hero hero-apropos">
         <div class="hero-content">
             <h1 class="hero-title">À Propos de Nous</h1>
             <p class="hero-subtitle">Découvrez l'histoire et la mission des Scouts Musulmans de France</p>
@@ -57,7 +57,7 @@
     </section>
 
     <!-- Section Histoire et Mission -->
-    <section class="activities" style="padding: 100px 20px;">
+    <section class="activities section-spacious">
         <div class="container">
             <!-- Section principale avec timeline -->
             <div style="text-align: center; margin-bottom: 80px;">
@@ -112,7 +112,7 @@
 
             <!-- Section mission avec layout alterné -->
             <div style="margin-bottom: 80px;">
-                <h2 class="section-title">Notre Mission & Spécialité</h2>
+                <h2 class="section-title">Notre Mission &amp; Spécialité</h2>
                 <p class="section-subtitle">Ce qui nous rend uniques</p>
                 
                 <!-- Bloc 1 : Voyages internationaux -->
@@ -159,7 +159,7 @@
                         <div style="background: var(--light-bg); padding: 25px; border-radius: 15px; border-left: 4px solid var(--primary-color);">
                             <h4 style="color: var(--text-dark); margin-bottom: 15px; font-size: 1.2rem;">Nos activités régulières :</h4>
                             <ul style="list-style: none; padding: 0;">
-                                <li style="margin: 8px 0; color: var(--text-body);"><i class="fas fa-calendar-weekend" style="color: var(--accent-color); margin-right: 10px;"></i>Week-ends complets (vendredi soir → dimanche)</li>
+                                <li style="margin: 8px 0; color: var(--text-body);"><i class="fas fa-calendar-days" style="color: var(--accent-color); margin-right: 10px;"></i>Week-ends complets (vendredi soir → dimanche)</li>
                                 <li style="margin: 8px 0; color: var(--text-body);"><i class="fas fa-campground" style="color: var(--accent-color); margin-right: 10px;"></i>Mini camps d'une semaine</li>
                                 <li style="margin: 8px 0; color: var(--text-body);"><i class="fas fa-fire" style="color: var(--accent-color); margin-right: 10px;"></i>Apprentissage des techniques scoutes</li>
                                 <li style="margin: 8px 0; color: var(--text-body);"><i class="fas fa-users" style="color: var(--accent-color); margin-right: 10px;"></i>Barbecues familiaux et soirées pyjama</li>
@@ -193,7 +193,7 @@
     </section>
 
     <!-- Section Équipe dirigeante -->
-    <section class="values" style="background: url('groupe.png') center/cover scroll; padding: 80px 20px;">
+    <section class="values values-team section-roomy">
         <div class="container">
             <div style="text-align: center; margin-bottom: 60px;">
                 <h2 class="section-title" style="color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Notre Équipe</h2>
@@ -244,7 +244,7 @@
                 <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border-radius: 15px; padding: 30px; max-width: 600px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.2);">
                     <h4 style="color: white; margin-bottom: 15px; font-size: 1.3rem;">Rejoignez notre équipe</h4>
                     <p style="color: rgba(255,255,255,0.9); margin-bottom: 20px;">Nous recherchons toujours des bénévoles passionnés pour accompagner nos scouts</p>
-                    <a href="index.html#contact" style="background: linear-gradient(45deg, var(--accent-color), #FFD700); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; display: inline-block;">
+                    <a href="index.html#contact" class="btn btn-accent">
                         Nous contacter
                     </a>
                 </div>
@@ -253,7 +253,7 @@
     </section>
 
     <!-- Section Engagement et Partenariats -->
-    <section class="join" style="padding: 80px 20px;">
+    <section class="join section-roomy">
         <div class="container">
             <h2 class="section-title">Nos Engagements</h2>
             <p class="section-subtitle">Au service de la jeunesse et de la société</p>
@@ -271,7 +271,7 @@
                             <span>Actions environnementales</span>
                         </div>
                         <div class="feature">
-                            <i class="fas fa-volunteer"></i>
+                            <i class="fas fa-hand-holding-heart"></i>
                             <span>Bénévolat communautaire</span>
                         </div>
                         <div class="feature">
@@ -358,12 +358,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Scouts Musulmans de France - SMF. Tous droits réservés.</p>
+                <p>&copy; <span data-current-year>2026</span> Scouts Musulmans de France - SMF. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html> 
