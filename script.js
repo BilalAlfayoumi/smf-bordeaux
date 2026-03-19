@@ -241,27 +241,100 @@ function initContactForm() {
         console.warn('EmailJS non disponible');
         return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const phoneRegex = /^\+?[0-9\s().-]{8,20}$/;
+
+    function clearFieldErrors() {
+        ['user_first_name', 'user_last_name', 'user_email', 'user_phone'].forEach((fieldName) => {
+            const field = contactForm.querySelector(`[name="${fieldName}"]`);
+            if (field) {
+                field.setCustomValidity('');
+            }
+        });
+    }
+
+    function validateContactFields(formData) {
+        clearFieldErrors();
+
+        const firstNameField = contactForm.querySelector('[name="user_first_name"]');
+        const lastNameField = contactForm.querySelector('[name="user_last_name"]');
+        const emailField = contactForm.querySelector('[name="user_email"]');
+        const phoneField = contactForm.querySelector('[name="user_phone"]');
+
+        const firstName = (formData.get('user_first_name') || '').trim();
+        const lastName = (formData.get('user_last_name') || '').trim();
+        const email = (formData.get('user_email') || '').trim();
+        const phone = (formData.get('user_phone') || '').trim();
+
+        if (!firstName) {
+            firstNameField?.setCustomValidity('Le prénom est requis.');
+            firstNameField?.reportValidity();
+            return false;
+        }
+
+        if (!lastName) {
+            lastNameField?.setCustomValidity('Le nom est requis.');
+            lastNameField?.reportValidity();
+            return false;
+        }
+
+        if (!emailRegex.test(email)) {
+            emailField?.setCustomValidity('Veuillez saisir une adresse email valide.');
+            emailField?.reportValidity();
+            return false;
+        }
+
+        const digitCount = phone.replace(/\D/g, '').length;
+        if (!phoneRegex.test(phone) || digitCount < 8 || digitCount > 15) {
+            phoneField?.setCustomValidity('Veuillez saisir un numéro de portable valide.');
+            phoneField?.reportValidity();
+            return false;
+        }
+
+        return true;
+    }
     
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const submitBtn = this.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
+
+        // Préparation des données du formulaire
+        const formData = new FormData(this);
+
+        // Validation front complémentaire
+        if (!validateContactFields(formData)) {
+            return;
+        }
+
+        const firstName = (formData.get('user_first_name') || '').trim();
+        const lastName = (formData.get('user_last_name') || '').trim();
+        const email = (formData.get('user_email') || '').trim();
+        const phone = (formData.get('user_phone') || '').trim();
+        const fullName = `${firstName} ${lastName}`.trim();
         
         // Animation de chargement
         submitBtn.textContent = 'Envoi en cours...';
         submitBtn.disabled = true;
         
-        // Préparation des données du formulaire
-        const formData = new FormData(this);
         const templateParams = {
             to_email: 'smfbordeaux@gmail.com',
-            from_name: formData.get('user_name'),
-            from_email: formData.get('user_email'),
-            phone: formData.get('user_phone') || 'Non fourni',
+            from_name: fullName,
+            from_first_name: firstName,
+            from_last_name: lastName,
+            from_email: email,
+            phone: phone,
             age_group: formData.get('age_group'),
             message: formData.get('message') || 'Aucun message spécifique.',
-            reply_to: formData.get('user_email')
+            reply_to: email,
+            // Compatibilité avec d'anciens templates EmailJS
+            user_name: fullName,
+            user_first_name: firstName,
+            user_last_name: lastName,
+            user_email: email,
+            user_phone: phone
         };
         
         // Envoi EmailJS
@@ -273,13 +346,14 @@ function initContactForm() {
                 
                 setTimeout(() => {
                     contactForm.reset();
+                    clearFieldErrors();
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                     submitBtn.style.background = '';
                 }, 3000);
             }, function(error) {
-                console.log('❌ Erreur d\'envoi:', error);
-                submitBtn.textContent = '❌ Erreur d\'envoi';
+                console.log('❌ Erreur d'envoi:', error);
+                submitBtn.textContent = '❌ Erreur d'envoi';
                 submitBtn.style.background = '#dc3545';
                 
                 setTimeout(() => {
