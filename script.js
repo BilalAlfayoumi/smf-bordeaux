@@ -25,11 +25,8 @@ function initMobileMenu() {
     const navMenu = document.querySelector('.nav-menu');
     
     if (!hamburger || !navMenu) {
-        console.log('Éléments navbar non trouvés');
         return;
     }
-
-    console.log('Initialisation du menu mobile');
 
     // Toggle du menu principal
     hamburger.addEventListener('click', function(e) {
@@ -94,6 +91,13 @@ function initMobileMenu() {
     // Fermer le menu avec la touche Escape
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    // Sécurité responsive : restaurer l'état lors du passage desktop/mobile
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
             closeMenu();
         }
     });
@@ -223,8 +227,6 @@ function initMobileDropdowns() {
         }
     });
 
-    // Debug logging pour diagnostic
-    console.log(`Dropdown mobile initialisé pour ${dropdowns.length} dropdown(s)`);
 }
 
 // Gestion du formulaire de contact
@@ -232,7 +234,6 @@ function initContactForm() {
     const contactForm = document.getElementById('contact-form');
     
     if (!contactForm) {
-        console.log('Formulaire de contact non trouvé sur cette page');
         return;
     }
 
@@ -340,7 +341,7 @@ function initContactForm() {
         // Envoi EmailJS
         emailjs.send('service_ubi0bue', 'template_39nzsbp', templateParams)
             .then(function(response) {
-                console.log('✅ Email envoyé avec succès!', response.status, response.text);
+                console.info('✅ Email envoyé avec succès!', response.status, response.text);
                 submitBtn.textContent = '✅ Message envoyé !';
                 submitBtn.style.background = '#28a745';
                 
